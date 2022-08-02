@@ -3,24 +3,23 @@ package com.atguigu.practiceNo2.lock;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-class LTicket{
+class LTicket {
     private int num = 30;
 
     private final ReentrantLock lock = new ReentrantLock();
 
-    public  void sale() {
-        if (num > 0) {
-            System.out.println(Thread.currentThread().getName() + "卖出:" + (num--) + "还剩:" + num);
+    public void sale() {
+        try {
+            lock.lock();
+            if (num > 0) {
+                System.out.println(Thread.currentThread().getName() + "卖出:" + (num--) + "还剩:" + num);
+            }
+        } finally {
+            lock.unlock();
         }
+
     }
 }
-
-
-
-
-
-
-
 
 
 /**
@@ -28,4 +27,9 @@ class LTicket{
  * @version 1.0
  */
 public class LSaleTicket {
+
+
+
+
+
 }
