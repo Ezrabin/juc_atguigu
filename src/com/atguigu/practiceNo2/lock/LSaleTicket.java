@@ -1,6 +1,7 @@
 package com.atguigu.practiceNo2.lock;
 
 
+
 import java.util.concurrent.locks.ReentrantLock;
 
 class LTicket {
