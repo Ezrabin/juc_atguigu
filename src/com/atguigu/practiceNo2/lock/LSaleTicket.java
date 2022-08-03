@@ -1,7 +1,6 @@
 package com.atguigu.practiceNo2.lock;
 
 
-
 import java.util.concurrent.locks.ReentrantLock;
 
 class LTicket {
@@ -30,13 +29,11 @@ class LTicket {
 public class LSaleTicket {
 
 
-
-
     public static void main(String[] args) {
         LTicket ticket = new LTicket();
         new Thread(() -> {
             for (int i = 0; i < 40; i++) {
-               ticket.sale();
+                ticket.sale();
             }
         }, "AA").start();
         new Thread(() -> {
@@ -50,8 +47,6 @@ public class LSaleTicket {
             }
         }, "CC").start();
     }
-
-
 
 
 }
