@@ -4,7 +4,7 @@ class Share {
     private int num = 0;
 
     public synchronized void add() throws InterruptedException {
-        if (num != 0){
+        while (num != 0){
             this.wait();
         }
         num++;
@@ -12,7 +12,7 @@ class Share {
         this.notifyAll();
     }
     public synchronized void remove() throws InterruptedException {
-        if (num != 1){
+        while (num != 1){
             this.wait();
         }
         num--;
@@ -46,6 +46,24 @@ public class ThreadDemo1 {
                 }
             }
         }, "BB").start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    share.add();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "CC").start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    share.remove();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "DD").start();
     }
 
 }
